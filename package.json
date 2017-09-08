@@ -11,6 +11,10 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:seanfitzg/giphytron.git"
+  },  
   "keywords": [],
   "author": "fitzgeralds",
   "license": "MIT",
@@ -28,14 +32,16 @@
           "rpm"
         ]
       },
-      "electronPackagerConfig": {},
+      "electronPackagerConfig": {
+        "icon": "src/cat.png.icns"
+      },
       "electronWinstallerConfig": {
         "name": ""
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
       "github_repository": {
-        "owner": "",
+        "owner": "Sean",
         "name": ""
       },
       "windowsStoreConfig": {
