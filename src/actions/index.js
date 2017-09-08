@@ -8,7 +8,7 @@ export const receiveImages = (searchTerm, json) => ({
     searchTerm,
     images: json.data.map(child => ({
         id: child.id,
-        url: child.bitly_gif_url
+        url: child.images.preview_gif.url
     })),
     receivedAt: Date.now()
 });

@@ -2,6 +2,6 @@ body {
     margin: 15;
     padding: 50;
     font-family: sans-serif;
-    overflow: hidden; 
+    overflow: scroll; 
     background-color: rgba(0,0,0,0);
   }

@@ -7,15 +7,9 @@ import App from './components/App';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 
-const store = createStore(
-    reducer,
-    applyMiddleware(
-        thunkMiddleware
-    )
-);
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 const render = () => {
-    //const App = require('./app').default;
     ReactDOM.render(
         <AppContainer>
             <Provider store={store}>

@@ -14,7 +14,7 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:seanfitzg/giphytron.git"
-  },  
+  },
   "keywords": [],
   "author": "fitzgeralds",
   "license": "MIT",
@@ -41,7 +41,7 @@
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
       "github_repository": {
-        "owner": "Sean",
+        "owner": "",
         "name": ""
       },
       "windowsStoreConfig": {
@@ -50,6 +50,7 @@
     }
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "electron-compile": "^6.4.1",
     "electron-devtools-installer": "^2.0.1",
     "react": "^15.4.1",

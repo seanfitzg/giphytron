@@ -15,7 +15,7 @@ const ResultsList = props => {
                       <ul>
                           {props.searchResults.images.map(image =>
                               <li key={image.id}>
-                                  {image.url}
+                                  <img src={image.url}></img>
                               </li>
                           )}
                       </ul>
