@@ -15,9 +15,9 @@ export const receiveImages = (searchTerm, json) => ({
     receivedAt: Date.now()
 });
 
-export const markAsFavourite = id => ({
+export const markAsFavourite = image => ({
     type: 'MARK_AS_FAVOURITE',
-    id
+    image
 });
 
 export const clear = text => ({

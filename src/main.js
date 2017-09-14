@@ -5,6 +5,7 @@ import { enableLiveReload } from 'electron-compile';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let selectedImage;
 
 const isDevMode = process.execPath.match(/[\\/]electron/);
 
@@ -40,7 +41,7 @@ const menuItem = new MenuItem({
     label: 'Add to Favourites',
     type: 'normal',
     click() {
-        mainWindow.webContents.send('info', { msg: 'hello from main process' });
+        mainWindow.webContents.send('addimage', selectedImage);
     }
 });
 menu.append(menuItem);
@@ -50,13 +51,8 @@ menu.append(menuItem);
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
-app.on('browser-window-created', function(event, win) {
-    // win.webContents.on('context-menu', function (e, params) {
-    //   menu.popup(win, params.x, params.y)
-    // })
-});
-
-ipcMain.on('show-context-menu', function(event) {
+ipcMain.on('show-context-menu', function(event, arg) {
+    selectedImage = arg;
     const win = BrowserWindow.fromWebContents(event.sender);
     menu.popup(win);
 });

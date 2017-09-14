@@ -5,8 +5,8 @@ class ResultsList extends React.Component {
     constructor() {
         super();
         let that = this;
-        ipcRenderer.on('info', function(event, data) {
-            that.props.markAsFavourite(1);
+        ipcRenderer.on('addimage', function(event, image) {
+            that.props.markAsFavourite(image);
         });
     }
 
@@ -23,7 +23,7 @@ class ResultsList extends React.Component {
                         <ul>
                             {this.props.searchResults.images.map(image => (
                                 <li key={image.id}>
-                                    <img className="context-menu" src={image.url} />
+                                    <img className="giphy-image" src={image.url} />
                                 </li>
                             ))}
                         </ul>
@@ -36,10 +36,15 @@ class ResultsList extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const contextMenuBtn = document.getElementsByClassName('context-menu');
-        if (contextMenuBtn.length > 0) {
-            contextMenuBtn[0].addEventListener('contextmenu', function(evt) {
-                ipcRenderer.send('show-context-menu');
+        let that = this;
+        const images = document.getElementsByClassName('giphy-image');
+        const imagesArray = Array.prototype.slice.call(images);
+        if (imagesArray.length > 0) {
+            imagesArray.forEach((image, index) => {
+                image.addEventListener('contextmenu', function(evt) {
+                    let selectedImage = that.props.searchResults.images.find(i => i.url === image.src);
+                    ipcRenderer.send('show-context-menu', selectedImage);
+                });
             });
         }
     }

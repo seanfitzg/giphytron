@@ -29,9 +29,8 @@ const searchResults = (state = defaultState, action) => {
 const saveImages = (state = [], action) => {
     switch (action.type) {
         case 'MARK_AS_FAVOURITE':
-            state.push(action.id);
+            state.push(action.image);
             return state;
-            break;
         default:
             return state;
     }
