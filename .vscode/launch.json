@@ -4,15 +4,13 @@
         {
             "name": "Launch Program",
             "type": "node",
-            "request": "attach",
-            "protocol": "legacy",
+            "request": "launch",
             "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron-forge",
-            "port": 5858,
-            "program": "${workspaceRoot}/src/index.js", // ensure this is path to main.js file
+            "cwd": "${workspaceRoot}",
+            "args" : ["."],
             "runtimeArgs": [
-                "start --debug-brk=5858 --nolazy"
-            ],
-            "cwd": "${workspaceRoot}"
+                
+            ]
         }
     ]
   }

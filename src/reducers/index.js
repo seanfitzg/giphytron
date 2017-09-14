@@ -19,11 +19,25 @@ const searchResults = (state = defaultState, action) => {
                 images: action.images,
                 searchComplete: true
             };
-        default:
+        case 'CLEAR':
             return defaultState;
+        default:
+            return state;
+    }
+};
+
+const saveImages = (state = [], action) => {
+    switch (action.type) {
+        case 'MARK_AS_FAVOURITE':
+            state.push(action.id);
+            return state;
+            break;
+        default:
+            return state;
     }
 };
 
 export default combineReducers({
-    searchResults
+    searchResults,
+    saveImages
 });

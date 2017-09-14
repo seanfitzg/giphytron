@@ -1,3 +1,5 @@
+import { ipcRenderer } from 'electron';
+
 export const searchFor = text => ({
     type: 'SEARCH_FOR',
     text
@@ -11,6 +13,11 @@ export const receiveImages = (searchTerm, json) => ({
         url: child.images.preview_gif.url
     })),
     receivedAt: Date.now()
+});
+
+export const markAsFavourite = id => ({
+    type: 'MARK_AS_FAVOURITE',
+    id
 });
 
 export const clear = text => ({
