@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchBox from '../containers/SearchBox';
 import ResultsHeader from '../containers/ResultsHeader';
+import Favourites from '../containers/Favourites';
 
 class App extends Component {
     render() {
@@ -11,6 +12,7 @@ class App extends Component {
                 </div>
                 <SearchBox />
                 <ResultsHeader />
+                <Favourites />
                 <div />
             </div>
         );

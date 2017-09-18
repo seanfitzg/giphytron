@@ -26,10 +26,13 @@ const searchResults = (state = defaultState, action) => {
     }
 };
 
-const saveImages = (state = [], action) => {
+const saveImages = (state = { images: [] }, action) => {
     switch (action.type) {
         case 'MARK_AS_FAVOURITE':
-            state.push(action.image);
+            if (!state.images.find(image => image.id === action.image.id))
+                return {
+                    images: [...state.images, action.image]
+                };
             return state;
         default:
             return state;
