@@ -21,11 +21,27 @@ const createWindow = async () => {
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-    // Open the DevTools.
-    if (isDevMode) {
-        await installExtension(REACT_DEVELOPER_TOOLS);
-        mainWindow.webContents.openDevTools();
-    }
+    // // Open the DevTools.
+    // if (isDevMode) {
+    //     await installExtension(REACT_DEVELOPER_TOOLS);
+    //     mainWindow.webContents.openDevTools();
+    // }
+
+    var menu = Menu.buildFromTemplate([
+        {
+            label: 'Electron',
+            submenu: [
+                {
+                    label: 'View Devtools',
+                    click: function() {
+                        installExtension(REACT_DEVELOPER_TOOLS);
+                        mainWindow.webContents.openDevTools();
+                    }
+                }
+            ]
+        }
+    ]);
+    Menu.setApplicationMenu(menu);
 
     // Emitted when the window is closed.
     mainWindow.on('closed', () => {
@@ -36,7 +52,7 @@ const createWindow = async () => {
     });
 };
 
-const menu = new Menu();
+const contextMenu = new Menu();
 const menuItem = new MenuItem({
     label: 'Add to Favourites',
     type: 'normal',
@@ -44,7 +60,7 @@ const menuItem = new MenuItem({
         mainWindow.webContents.send('addimage', selectedImage);
     }
 });
-menu.append(menuItem);
+contextMenu.append(menuItem);
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -54,7 +70,7 @@ app.on('ready', createWindow);
 ipcMain.on('show-context-menu', function(event, arg) {
     selectedImage = arg;
     const win = BrowserWindow.fromWebContents(event.sender);
-    menu.popup(win);
+    contextMenu.popup(win);
 });
 
 // Quit when all windows are closed.
