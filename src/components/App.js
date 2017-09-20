@@ -6,8 +6,8 @@ import Favourites from '../containers/Favourites';
 class App extends Component {
     render() {
         return (
-            <div className="App">
-                <div className="App-header">
+            <div className="App"  className="container">
+                <div className="App-header" className="page-header">
                     <h2>Giphy Search</h2>
                 </div>
                 <SearchBox />

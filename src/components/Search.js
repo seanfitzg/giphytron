@@ -26,8 +26,8 @@ const Search = ({ getImages, clear }) => {
                         input = node;
                     }}
                 />
-                <input type="submit" value="Search" />
-                <input type="button" value="Clear" onClick={clearTextbox} />
+                <input type="submit" className="btn btn-info" value="Search" />
+                <input type="button"  className="btn btn-info" value="Clear" onClick={clearTextbox} />
             </div>
         </form>
     );

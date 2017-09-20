@@ -20,13 +20,15 @@ class ResultsList extends React.Component {
                 {this.props.searchResults.searchComplete ? (
                     <div>
                         <span>The following was found matching the term '{this.props.searchResults.searchTerm}'</span>
-                        <ul>
-                            {this.props.searchResults.images.map(image => (
-                                <li key={image.id}>
-                                    <img className="giphy-image" src={image.url} />
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="container">
+                            <ul className="list-group">
+                                {this.props.searchResults.images.map(image => (
+                                    <li className="list-group-item" key={image.id}>
+                                        <img className="giphy-image" src={image.url} />
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 ) : (
                     ''
