@@ -9,3 +9,11 @@ body {
 .btn {
     margin: 5px
 }
+
+.favourites {
+    background-color: lightblue
+}
+
+.search-form {
+    margin-bottom: 10px
+}

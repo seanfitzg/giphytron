@@ -21,6 +21,10 @@ const searchResults = (state = defaultState, action) => {
             };
         case 'CLEAR':
             return defaultState;
+        case 'REPLACE_STATE':
+            return action.state.searchResults;
+        case 'UPDATE_SEARCH_TERM':
+            return Object.assign({}, state, { searchTerm: action.searchTerm });
         default:
             return state;
     }
@@ -34,6 +38,10 @@ const saveImages = (state = { images: [] }, action) => {
                     images: [...state.images, action.image]
                 };
             return state;
+        case 'CLEAR':
+            return defaultState;
+        case 'REPLACE_STATE':
+            return action.state.saveImages;
         default:
             return state;
     }

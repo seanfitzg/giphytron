@@ -5,6 +5,16 @@ export const searchFor = text => ({
     text
 });
 
+export const updateSearchTerm = searchTerm => ({
+    type: 'UPDATE_SEARCH_TERM',
+    searchTerm
+});
+
+export const replaceState = state => ({
+    type: 'REPLACE_STATE',
+    state
+});
+
 export const receiveImages = (searchTerm, json) => ({
     type: 'RECEIVE_IMAGES',
     searchTerm,

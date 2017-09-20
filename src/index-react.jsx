@@ -6,6 +6,8 @@ import { createStore, applyMiddleware } from 'redux';
 import App from './components/App';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
+import { ipcRenderer } from 'electron';
+import { replaceState } from './actions';
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
@@ -24,3 +26,12 @@ render();
 if (module.hot) {
     module.hot.accept(render);
 }
+
+ipcRenderer.on('save-as', function() {
+    ipcRenderer.send('save-as-file', JSON.stringify(store.getState()));
+});
+
+ipcRenderer.on('replace-state', function(event, file) {
+    let state = JSON.parse(file);
+    store.dispatch(replaceState(state));
+});

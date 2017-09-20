@@ -19,7 +19,6 @@ class ResultsList extends React.Component {
             <div>
                 {this.props.searchResults.searchComplete ? (
                     <div>
-                        <span>The following was found matching the term '{this.props.searchResults.searchTerm}'</span>
                         <div className="container">
                             <ul className="list-group">
                                 {this.props.searchResults.images.map(image => (

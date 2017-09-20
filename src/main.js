@@ -1,6 +1,7 @@
-import { app, BrowserWindow, Menu, MenuItem, ipcMain, ipcRenderer } from 'electron';
+import { app, BrowserWindow, Menu, MenuItem, ipcMain, ipcRenderer, dialog } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { enableLiveReload } from 'electron-compile';
+import fs from 'fs';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -21,21 +22,36 @@ const createWindow = async () => {
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-    // // Open the DevTools.
-    // if (isDevMode) {
-    //     await installExtension(REACT_DEVELOPER_TOOLS);
-    //     mainWindow.webContents.openDevTools();
-    // }
-
     var menu = Menu.buildFromTemplate([
         {
             label: 'Electron',
             submenu: [
                 {
                     label: 'View Devtools',
-                    click: function() {
+                    click: () => {
                         installExtension(REACT_DEVELOPER_TOOLS);
                         mainWindow.webContents.openDevTools();
+                    }
+                },
+                {
+                    label: 'Save as...',
+                    click: () => {
+                        mainWindow.webContents.send('save-as');
+                    }
+                },
+                {
+                    label: 'Open...',
+                    click: function() {
+                        dialog.showOpenDialog(
+                            mainWindow,
+                            fileNames => {
+                                if (!fileNames) return;
+                                var fileName = fileNames[0];
+                                fs.readFile(fileName, 'utf-8', (err, data) => {
+                                    mainWindow.webContents.send('replace-state', data);
+                                });
+                            }
+                        );
                     }
                 }
             ]
@@ -71,6 +87,19 @@ ipcMain.on('show-context-menu', function(event, arg) {
     selectedImage = arg;
     const win = BrowserWindow.fromWebContents(event.sender);
     contextMenu.popup(win);
+});
+
+ipcMain.on('save-as-file', function(event, arg) {
+    dialog.showSaveDialog(
+        mainWindow,
+        {
+            filters: [{ name: 'text', extensions: ['txt'] }]
+        },
+        fileName => {
+            if (!fileName) return;
+            fs.writeFile(fileName, arg, function(err) {});
+        }
+    );
 });
 
 // Quit when all windows are closed.

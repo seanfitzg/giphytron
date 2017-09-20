@@ -5,7 +5,7 @@ const FavouritesList = ({ saveImages }) => {
     return (
         <div>
             {saveImages && saveImages.images.length > 0 ? (
-                <div>
+                <div className="favourites">
                     <div>Saved Images...</div>
                     <div>
                         <ul>
